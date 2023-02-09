@@ -83,7 +83,7 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
             TextoRequisitos(
                 texto = "1 letra en mayuscula minimo",
                 Modifier.align(Alignment.Start),
-                registroViewModel.colorTextorequisitos(name)
+                registroViewModel.colorTextorequisitos(name, 5)
             )
             EmailRegister(email) {
                 registroViewModel.onLoginChanged(name, it, password, repeatPaassword, isSingUpEnable)
@@ -91,7 +91,7 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
             TextoRequisitos(
                 texto = "Un formato de email valido",
                 Modifier.align(Alignment.Start),
-                registroViewModel.colorTextorequisitos(email, 5)
+                registroViewModel.colorTextorequisitos(email, 6)
             )
             PasswordRegister(
                 password,

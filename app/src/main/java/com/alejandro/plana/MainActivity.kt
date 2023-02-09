@@ -7,11 +7,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.alejandro.plana.resgistro.ui.RegistroScreen
+import com.alejandro.plana.navigation.Navegacion
 import com.alejandro.plana.resgistro.ui.RegistroViewModel
 import com.alejandro.plana.ui.theme.PlanATheme
 import dagger.hilt.android.AndroidEntryPoint

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -66,6 +67,7 @@ class RegistroViewModel @Inject constructor(): ViewModel() {
 
 
     //textos de error
+    //UpperCase no funciona
 
     fun colorTextorequisitos(texto: String, condicion: Int = 1, repeatPassword: String = ""): Color {
         if (condicion == 1) {
@@ -93,6 +95,12 @@ class RegistroViewModel @Inject constructor(): ViewModel() {
                 return Color.Red
             } else {
                 return Color.Gray
+            }
+        } else if (condicion == 5){
+            if (texto.uppercase(locale = Locale.getDefault()) == texto) {
+                return Color.Gray
+            } else {
+                return Color.Red
             }
         } else {
             if (Patterns.EMAIL_ADDRESS.matcher(texto).matches()) {

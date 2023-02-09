@@ -1,11 +1,10 @@
-package com.alejandro.plana
+package com.alejandro.plana.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alejandro.plana.inicio.ui.InicioScreen
-import com.alejandro.plana.inicio.ui.InicioViewModel
 import com.alejandro.plana.resgistro.ui.RegistroScreen
 import com.alejandro.plana.resgistro.ui.RegistroViewModel
 import com.alejandro.plana.navigation.Routes
