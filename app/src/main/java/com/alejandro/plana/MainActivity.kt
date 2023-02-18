@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.alejandro.plana.navigation.Navegacion
+import com.alejandro.plana.core.navigation.Navegacion
 import com.alejandro.plana.resgistro.ui.RegistroViewModel
 import com.alejandro.plana.ui.theme.PlanATheme
 import dagger.hilt.android.AndroidEntryPoint

@@ -6,11 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistroViewModel @Inject constructor(): ViewModel() {
+class RegistroViewModel @Inject constructor() : ViewModel() {
 
     //Parte de cambios de la UI
 
@@ -29,7 +28,7 @@ class RegistroViewModel @Inject constructor(): ViewModel() {
     private val _repeatPassword = MutableLiveData<String>()
     val repeatPassword: LiveData<String> = _repeatPassword
 
-    fun onLoginChanged(
+    fun onRegisterChanged(
         name: String,
         email: String,
         password: String,
@@ -56,7 +55,7 @@ class RegistroViewModel @Inject constructor(): ViewModel() {
 
     //Parte de la logica
 
-    fun enableSingUp(
+    private fun enableSingUp(
         email: String,
         password: String,
         name: String,
@@ -69,44 +68,55 @@ class RegistroViewModel @Inject constructor(): ViewModel() {
     //textos de error
     //UpperCase no funciona
 
-    fun colorTextorequisitos(texto: String, condicion: Int = 1, repeatPassword: String = ""): Color {
-        if (condicion == 1) {
-            if (texto.isBlank()) {
-                return Color.Red
-            } else {
-                return Color.Gray
+    fun colorTextorequisitos(
+        texto: String,
+        condicion: Int = 1,
+        repeatPassword: String = ""
+    ): Color {
+        when (condicion) {
+            1 -> {
+                return if (texto.isBlank()) {
+                    Color.Red
+                } else {
+                    Color.Gray
+                }
             }
-        } else if (condicion == 2) {
-            if (texto.length < 6) {
-                return Color.Red
-            } else {
-                return Color.Gray
+            2 -> {
+                return if (texto.length < 6) {
+                    Color.Red
+                } else {
+                    Color.Gray
+                }
             }
-        } else if (condicion == 3) {
-            if (texto.isBlank() or repeatPassword.isBlank()){
-                return Color.Red
-            } else if (texto == repeatPassword) {
-                return Color.Gray
-            } else {
-                return Color.Red
+            3 -> {
+                return if (texto.isBlank() or repeatPassword.isBlank()) {
+                    Color.Red
+                } else if (texto == repeatPassword) {
+                    Color.Gray
+                } else {
+                    Color.Red
+                }
             }
-        } else if (condicion == 4) {
-            if (texto.length < 5) {
-                return Color.Red
-            } else {
-                return Color.Gray
+            4 -> {
+                return if (texto.length < 5) {
+                    Color.Red
+                } else {
+                    Color.Gray
+                }
             }
-        } else if (condicion == 5){
-            if (texto.uppercase(locale = Locale.getDefault()) == texto) {
-                return Color.Gray
-            } else {
-                return Color.Red
+            5 -> {
+                return if (texto.any { it.isUpperCase() }) {
+                    Color.Gray
+                } else {
+                    Color.Red
+                }
             }
-        } else {
-            if (Patterns.EMAIL_ADDRESS.matcher(texto).matches()) {
-                return Color.Gray
-            } else {
-                return Color.Red
+            else -> {
+                return if (Patterns.EMAIL_ADDRESS.matcher(texto).matches()) {
+                    Color.Gray
+                } else {
+                    Color.Red
+                }
             }
         }
     }

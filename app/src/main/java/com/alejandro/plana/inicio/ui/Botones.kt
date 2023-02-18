@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -16,21 +17,28 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alejandro.plana.inicio.model.DataBoton
 
 @Composable
-fun Boton(dataBoton: DataBoton) {
+fun Boton(
+    idPhoto: Int,
+    nombre: String,
+    texto: String,
+    backgroundColor: Color,
+    textColor: Color,
+    onClick: () -> Unit
+) {
     Card(
         elevation = 15.dp,
         shape = RoundedCornerShape(50.dp),
-        backgroundColor = dataBoton.backgroundColor,
+        backgroundColor = backgroundColor,
         modifier = Modifier
             .padding(10.dp)
             .wrapContentSize(Alignment.Center)
             .fillMaxWidth()
-            .clickable(onClick = {
-                dataBoton.onClicked
-            })
+            .clickable(
+                onClick =
+                onClick
+            )
     ) {
         Row(
             modifier = Modifier
@@ -41,8 +49,8 @@ fun Boton(dataBoton: DataBoton) {
             horizontalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(dataBoton.idPhoto),
-                contentDescription = dataBoton.nombre,
+                painter = painterResource(idPhoto),
+                contentDescription = nombre,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .size(50.dp)
@@ -54,9 +62,9 @@ fun Boton(dataBoton: DataBoton) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Text(
-                    text = dataBoton.texto,
+                    text = texto,
                     style = TextStyle(
-                        color = dataBoton.textColor,
+                        color = textColor,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp

@@ -2,6 +2,7 @@ package com.alejandro.plana.resgistro.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,8 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -33,20 +36,47 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.alejandro.plana.R
 import com.alejandro.plana.ui.theme.BlueTwitter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
 fun RegistroScreen(registroViewModel: RegistroViewModel, navController: NavHostController) {
-    LazyColumn(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
-        item { Alignment.Start }
+    Box(Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.map_e1674497309430),
+            contentDescription = "mapa",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        LazyColumn(
+            Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                Image(
+                    painter = painterResource(id = R.drawable.logocompleton),
+                    contentDescription = "logo",
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier.background(
+                        Color(
+                            red = 1f,
+                            green = 1f,
+                            blue = 1f,
+                            alpha = 0.25f
+                        )
+                    )
 
-        item {
-            Alignment.BottomCenter; Box(
-            Modifier
-                .fillMaxSize()
-        ) { RegistroUsuario(navController, registroViewModel) }
+                )
+            }
+            item {
+                Alignment.BottomCenter; Box(
+                Modifier
+                    .fillMaxSize()
+            ) { RegistroUsuario(navController, registroViewModel) }
+            }
         }
     }
 }
@@ -72,7 +102,7 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
         Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.size(16.dp))
             Name(name) {
-                registroViewModel.onLoginChanged(
+                registroViewModel.onRegisterChanged(
                     it,
                     email,
                     password,
@@ -86,7 +116,13 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
                 registroViewModel.colorTextorequisitos(name, 5)
             )
             EmailRegister(email) {
-                registroViewModel.onLoginChanged(name, it, password, repeatPaassword, isSingUpEnable)
+                registroViewModel.onRegisterChanged(
+                    name,
+                    it,
+                    password,
+                    repeatPaassword,
+                    isSingUpEnable
+                )
             }
             TextoRequisitos(
                 texto = "Un formato de email valido",
@@ -100,7 +136,13 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
                 coroutineScope,
                 focusManager
             ) {
-                registroViewModel.onLoginChanged(name, email, it, repeatPaassword, isSingUpEnable)
+                registroViewModel.onRegisterChanged(
+                    name,
+                    email,
+                    it,
+                    repeatPaassword,
+                    isSingUpEnable
+                )
             }
             TextoRequisitos(
                 texto = "6 caracteres minimo",
@@ -114,7 +156,7 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
                 coroutineScope,
                 focusManager
             ) {
-                registroViewModel.onLoginChanged(name, email, password, it, isSingUpEnable)
+                registroViewModel.onRegisterChanged(name, email, password, it, isSingUpEnable)
             }
             TextoRequisitos(
                 texto = "Misma contraseña",
