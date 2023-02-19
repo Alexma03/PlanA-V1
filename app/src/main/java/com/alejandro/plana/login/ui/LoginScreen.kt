@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alejandro.plana.R
 import com.alejandro.plana.core.navigation.Routes
@@ -37,7 +38,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
+fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltViewModel()) {
     Box(Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.map_e1674497309430),
@@ -67,7 +68,7 @@ fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
                 Alignment.BottomCenter; Box(
                 Modifier
                     .fillMaxSize()
-            ) { Login(navController, loginViewModel) }
+            ) { Login(navController, viewModel) }
             }
         }
     }
@@ -194,11 +195,13 @@ fun LoginButton(loginEnable: Boolean, navController: NavController) {
     Button(
         onClick = {
             navController.navigate(Routes.Home.route)
-            suspend { withContext(Dispatchers.Main) {
-                Toast.makeText(
-                    context, "Has iniciado sesion correctamente", Toast.LENGTH_SHORT
-                ).show()
-            } }
+            suspend {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        context, "Has iniciado sesion correctamente", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         },
         enabled = loginEnable,
         shape = RoundedCornerShape(50.dp),

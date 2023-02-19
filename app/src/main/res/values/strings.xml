@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PlanA</string>
+
+    //IDs
+    <string name="web_client_id">831641773175-pmk7jt9e1uqobo582os6dq4m32e0mahe.apps.googleusercontent.com</string>
+
+    //Menu Items
+    <string name="revoke_access_item">Revoke Access</string>
+    <string name="sign_out_item">Sign-out</string>
 </resources>

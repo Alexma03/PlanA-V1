@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "831641773175",
+    "project_id": "plan-a-develop",
+    "storage_bucket": "plan-a-develop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831641773175:android:938113ec3cbefc1ead9272",
+        "android_client_info": {
+          "package_name": "com.alejandro.plana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831641773175-gm28edv350c6klv81i1n74j8u308a7m1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alejandro.plana",
+            "certificate_hash": "1059fd80d429b72b9a9f83523e8ff1d8b3d5f90c"
+          }
+        },
+        {
+          "client_id": "831641773175-pmk7jt9e1uqobo582os6dq4m32e0mahe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0ElFvHbv5OXbioxfQYFsnAK_DQmIBh7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831641773175-1tjrsrtnm1mimvsa2rih6nappgb9j1u0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

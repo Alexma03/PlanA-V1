@@ -4,8 +4,12 @@ import android.util.Patterns
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginViewModel {
+@HiltViewModel
+class LoginViewModel @Inject constructor() : ViewModel() {
 
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email

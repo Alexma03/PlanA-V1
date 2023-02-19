@@ -1,5 +1,9 @@
 package com.alejandro.plana.inicio.ui
 
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,6 +14,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -21,15 +26,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.alejandro.plana.R
-import com.alejandro.plana.core.navigation.Routes
 import com.alejandro.plana.ui.theme.BlueFacebook
 import com.alejandro.plana.ui.theme.BlueGoogle
 import com.alejandro.plana.ui.theme.BlueTwitter
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.alejandro.plana.core.navigation.Routes.*
+import com.alejandro.plana.inicio.ui.components.OneTapSignIn
+import com.alejandro.plana.inicio.ui.components.SignInWithGoogle
+import com.google.android.gms.auth.api.identity.BeginSignInResult
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.withContext
 
 
 @Composable
 fun InicioScreen(
     navController: NavHostController,
+    viewModel: InicioViewModel = hiltViewModel(),
+    navigateToProfileScreen: () -> Unit
+
 ) {
     Box(Modifier.fillMaxSize()) {
         Image(
@@ -75,7 +90,7 @@ fun InicioScreen(
                             "Continuar con Google",
                             Color.White,
                             BlueGoogle,
-                        ) { navController.navigate(Routes.Prueba.route) }
+                        ) { viewModel.oneTapSignIn() }
 
 
                         Boton(
@@ -84,7 +99,7 @@ fun InicioScreen(
                             "Continuar con Twitter",
                             BlueTwitter,
                             Color.White,
-                        ) { navController.navigate(Routes.Login.route) }
+                        ) { navController.navigate(Profile.route) }
 
 
                         Boton(
@@ -93,7 +108,7 @@ fun InicioScreen(
                             "Continuar con Facebook",
                             BlueFacebook,
                             Color.White,
-                        ) { navController.navigate(Routes.Login.route) }
+                        ) { navController.navigate(Home.route) }
 
 
                         Boton(
@@ -102,7 +117,7 @@ fun InicioScreen(
                             "Iniciar sesion Email",
                             Color.White,
                             Color.Gray,
-                        ) { navController.navigate(Routes.Login.route) }
+                        ) { navController.navigate(Login.route) }
 
                         SignUp(navController)
                     }
@@ -112,6 +127,38 @@ fun InicioScreen(
         }
 
     }
+
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            try {
+                val credentials = viewModel.oneTapClient.getSignInCredentialFromIntent(result.data)
+                val googleIdToken = credentials.googleIdToken
+                val googleCredentials = GoogleAuthProvider.getCredential(googleIdToken, null)
+                viewModel.signInWithGoogle(googleCredentials)
+            } catch (it: ApiException) {
+                print(it)
+            }
+        }
+    }
+
+    fun launch(signInResult: BeginSignInResult) {
+        val intent = IntentSenderRequest.Builder(signInResult.pendingIntent.intentSender).build()
+        launcher.launch(intent)
+    }
+
+    OneTapSignIn(
+        launch = {
+            launch(it)
+        }
+    )
+
+    SignInWithGoogle(
+        navigateToHomeScreen = { signedIn ->
+            if (signedIn) {
+                navigateToProfileScreen()
+            }
+        }
+    )
 }
 
 
@@ -138,7 +185,7 @@ fun SignUp(navController: NavHostController) {
                 text = "Sign up.",
                 Modifier
                     .padding(horizontal = 8.dp)
-                    .clickable(onClick = { navController.navigate(Routes.Registro.route) }),
+                    .clickable(onClick = { navController.navigate(Registro.route) }),
                 fontSize = 15.sp,
                 color = BlueTwitter,
                 fontWeight = FontWeight.ExtraBold

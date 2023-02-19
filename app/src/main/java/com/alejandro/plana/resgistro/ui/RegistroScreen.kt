@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alejandro.plana.R
 import com.alejandro.plana.ui.theme.BlueTwitter
@@ -42,7 +43,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun RegistroScreen(registroViewModel: RegistroViewModel, navController: NavHostController) {
+fun RegistroScreen(navController: NavHostController, viewModel: RegistroViewModel = hiltViewModel()) {
     Box(Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.map_e1674497309430),
@@ -75,7 +76,7 @@ fun RegistroScreen(registroViewModel: RegistroViewModel, navController: NavHostC
                 Alignment.BottomCenter; Box(
                 Modifier
                     .fillMaxSize()
-            ) { RegistroUsuario(navController, registroViewModel) }
+            ) { RegistroUsuario(navController, viewModel) }
             }
         }
     }

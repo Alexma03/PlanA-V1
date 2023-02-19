@@ -1,24 +1,60 @@
 package com.alejandro.plana.core.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
+import com.alejandro.plana.core.navigation.Routes.*
+import com.alejandro.plana.home.ui.HomeScreen
 import com.alejandro.plana.inicio.ui.InicioScreen
-import com.alejandro.plana.resgistro.ui.RegistroScreen
-import com.alejandro.plana.resgistro.ui.RegistroViewModel
 import com.alejandro.plana.login.ui.LoginScreen
-import com.alejandro.plana.login.ui.LoginViewModel
+import com.alejandro.plana.profile.ProfileScreen
+import com.alejandro.plana.resgistro.ui.RegistroScreen
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+
 
 @Composable
-fun Navegacion() {
-    val navigationController = rememberNavController()
-    NavHost(navController = navigationController, startDestination = Routes.Inicio.route) {
-        composable(Routes.Inicio.route) { InicioScreen(navigationController) }
-        composable(Routes.Registro.route) { RegistroScreen(RegistroViewModel(), navigationController) }
-        composable(Routes.Home.route) {  }
-        composable(Routes.Login.route) { LoginScreen(navigationController, LoginViewModel()) }
-        composable(Routes.Prueba.route) {  }
+@ExperimentalAnimationApi
+fun Navegacion(
+    navController: NavHostController
+) {
+    AnimatedNavHost(
+        navController = navController,
+        startDestination = Inicio.route,
+        enterTransition = {EnterTransition.None },
+        exitTransition = { ExitTransition.None }
+    ) {
+        composable(
+            route = Inicio.route
+        ) {
+            InicioScreen(
+                navController,
+                navigateToProfileScreen = {
+                    navController.navigate(Profile.route)
+                }
+            )
+        }
+        composable(
+            route = Profile.route
+        ) {
+            ProfileScreen(
+                navigateToAuthScreen = {
+                    navController.popBackStack()
+                    navController.navigate(Inicio.route)
+                }
+            )
+        }
+        composable(route = Home.route) {
+            HomeScreen(navigationController = navController)
+        }
+        composable(route = Registro.route) {
+            RegistroScreen(navController = navController)
+        }
+        composable(route = Login.route) {
+            LoginScreen(navController = navController)
+        }
     }
-
 }
+
