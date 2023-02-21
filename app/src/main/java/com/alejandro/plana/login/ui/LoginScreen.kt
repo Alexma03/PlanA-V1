@@ -44,7 +44,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
             painter = painterResource(id = R.drawable.map_e1674497309430),
             contentDescription = "mapa",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().align(Alignment.Center)
         )
         LazyColumn(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
             item {
@@ -59,7 +59,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                             blue = 1f,
                             alpha = 0.25f
                         )
-                    )
+                    ).align(Alignment.Center)
 
                 )
             }
