@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/Alexma03/PlanA-V1/master/app/src/main/res/drawable/icono.png
+(https://raw.githubusercontent.com/Alexma03/PlanA-V1/master/app/src/main/res/drawable/icono.png)
 # PlanA-V1
 
 Mi Proyecto Principal de Final de Grado
