@@ -1,3 +1,4 @@
+https://raw.githubusercontent.com/Alexma03/PlanA-V1/blob/master/app/src/main/res/drawable/icono.png
 # PlanA-V1
 
 Mi Proyecto Principal de Final de Grado
@@ -35,3 +36,4 @@ Creada desde 0 por mi
 * 0.1
     * Initial Release
     
+## Capturas
