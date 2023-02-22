@@ -37,4 +37,4 @@ Creada desde 0 por mi
     * Initial Release
     
 ## Capturas
-[![photo-2023-02-22-00-14-52.jpg](https://i.postimg.cc/JzDC3F5B/photo-2023-02-22-00-14-52.jpg)](https://postimg.cc/xX2Znt70)
+[![photo-2023-02-22-00-14-52.jpg](https://i.postimg.cc/JzDC3F5B/photo-2023-02-22-00-14-52.jpg)](https://postimg.cc/xX2Znt70) [![photo-2023-02-22-00-14-59.jpg](https://i.postimg.cc/d33nrbc7/photo-2023-02-22-00-14-59.jpg)](https://postimg.cc/5QcwMk01)
