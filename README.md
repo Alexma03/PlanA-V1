@@ -1,4 +1,4 @@
-[![logocompletob.png](https://i.postimg.cc/xdBZfjws/logocompletob.png)](https://postimg.cc/f3jC5sTX)
+[![logocompletob.png](https://i.postimg.cc/VLRLd2L9/logocompletob.png)](https://postimg.cc/SJnpPT9j)
 # PlanA-V1
 
 Mi Proyecto Principal de Final de Grado
