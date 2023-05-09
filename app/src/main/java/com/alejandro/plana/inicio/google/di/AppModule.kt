@@ -1,13 +1,14 @@
-package com.alejandro.plana.inicio.google.di
+package com.alejandro.plana.inicio.di
 
 import android.app.Application
 import android.content.Context
 import com.alejandro.plana.R
 import com.alejandro.plana.core.Constants.SIGN_IN_REQUEST
 import com.alejandro.plana.core.Constants.SIGN_UP_REQUEST
-import com.alejandro.plana.inicio.google.data.repository.AuthRepository
-import com.alejandro.plana.inicio.google.data.repository.ProfileRepositoryGoogle
-import com.alejandro.plana.inicio.google.domain.repository.ProfileGoogleRepository
+import com.alejandro.plana.inicio.data.repository.AuthRepositoryGoogle
+import com.alejandro.plana.inicio.data.repository.ProfileRepositoryGoogle
+import com.alejandro.plana.inicio.domain.repository.AuthGoogleRepository
+import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -140,7 +141,7 @@ class AppModule {
         @Named(SIGN_UP_REQUEST)
         signUpRequest: BeginSignInRequest,
         db: FirebaseFirestore
-    ): AuthRepository = AuthRepository(
+    ): AuthGoogleRepository = AuthRepositoryGoogle(
         auth = auth,
         oneTapClient = oneTapClient,
         signInRequest = signInRequest,

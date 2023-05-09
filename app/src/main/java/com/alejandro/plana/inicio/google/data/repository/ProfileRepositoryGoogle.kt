@@ -1,10 +1,10 @@
-package com.alejandro.plana.inicio.google.data.repository
+package com.alejandro.plana.inicio.data.repository
 
 import com.alejandro.plana.core.Constants.USERS
-import com.alejandro.plana.inicio.domain.model.Response.*
-import com.alejandro.plana.inicio.google.domain.repository.ProfileGoogleRepository
-import com.alejandro.plana.inicio.google.domain.repository.RevokeAccessResponse
-import com.alejandro.plana.inicio.google.domain.repository.SignOutResponse
+import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
+import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
+import com.alejandro.plana.profile.google.domain.RevokeAccessResponse
+import com.alejandro.plana.profile.google.domain.SignOutResponse
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
