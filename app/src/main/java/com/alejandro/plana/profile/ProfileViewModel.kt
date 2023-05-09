@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
-import com.alejandro.plana.inicio.domain.repository.ProfileGoogleRepository
-import com.alejandro.plana.inicio.domain.repository.RevokeAccessResponse
-import com.alejandro.plana.inicio.domain.repository.SignOutResponse
+import com.alejandro.plana.inicio.domain.model.Response.*
+import com.alejandro.plana.inicio.google.domain.repository.ProfileGoogleRepository
+import com.alejandro.plana.inicio.google.domain.repository.RevokeAccessResponse
+import com.alejandro.plana.inicio.google.domain.repository.SignOutResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

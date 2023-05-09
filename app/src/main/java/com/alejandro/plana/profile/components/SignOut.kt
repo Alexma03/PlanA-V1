@@ -3,7 +3,7 @@ package com.alejandro.plana.profile.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
+import com.alejandro.plana.inicio.domain.model.Response.*
 import com.alejandro.plana.inicio.ui.components.ProgressBar
 import com.alejandro.plana.profile.ProfileViewModel
 

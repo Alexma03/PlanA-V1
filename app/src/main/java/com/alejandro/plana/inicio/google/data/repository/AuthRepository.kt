@@ -1,4 +1,4 @@
-package com.alejandro.plana.inicio.data.repository
+package com.alejandro.plana.inicio.google.data.repository
 
 import com.alejandro.plana.core.Constants.CREATED_AT
 import com.alejandro.plana.core.Constants.DISPLAY_NAME
@@ -7,9 +7,9 @@ import com.alejandro.plana.core.Constants.PHOTO_URL
 import com.alejandro.plana.core.Constants.SIGN_IN_REQUEST
 import com.alejandro.plana.core.Constants.SIGN_UP_REQUEST
 import com.alejandro.plana.core.Constants.USERS
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
-import com.alejandro.plana.inicio.domain.repository.AuthGoogleRepository
+import com.alejandro.plana.inicio.domain.model.Response.*
 import com.alejandro.plana.inicio.domain.repository.OneTapSignInResponse
+import com.alejandro.plana.inicio.google.domain.repository.AuthGoogleRepository
 import com.alejandro.plana.inicio.domain.repository.SignInWithGoogleResponse
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -28,7 +28,7 @@ import javax.inject.Singleton
  * Esta clase es la encargada de manejar la autenticación con Google.
  */
 @Singleton
-class AuthRepositoryGoogle  @Inject constructor(
+open class AuthRepository  @Inject constructor(
     private val auth: FirebaseAuth,
     private var oneTapClient: SignInClient,
     @Named(SIGN_IN_REQUEST)

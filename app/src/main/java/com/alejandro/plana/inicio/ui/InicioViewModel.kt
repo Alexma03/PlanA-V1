@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
-import com.alejandro.plana.inicio.domain.repository.*
+import com.alejandro.plana.inicio.domain.model.Response.*
+import com.alejandro.plana.inicio.google.domain.repository.AuthGoogleRepository
+import com.alejandro.plana.inicio.google.domain.repository.OneTapSignInResponse
+import com.alejandro.plana.inicio.google.domain.repository.SignInWithGoogleResponse
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.AuthCredential
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,10 +1,10 @@
-package com.alejandro.plana.inicio.data.repository
+package com.alejandro.plana.inicio.google.data.repository
 
 import com.alejandro.plana.core.Constants.USERS
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
-import com.alejandro.plana.inicio.domain.repository.ProfileGoogleRepository
-import com.alejandro.plana.inicio.domain.repository.RevokeAccessResponse
-import com.alejandro.plana.inicio.domain.repository.SignOutResponse
+import com.alejandro.plana.inicio.domain.model.Response.*
+import com.alejandro.plana.inicio.google.domain.repository.ProfileGoogleRepository
+import com.alejandro.plana.inicio.google.domain.repository.RevokeAccessResponse
+import com.alejandro.plana.inicio.google.domain.repository.SignOutResponse
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +23,7 @@ class ProfileRepositoryGoogle @Inject constructor(
     private var oneTapClient: SignInClient,
     private var signInClient: GoogleSignInClient,
     private val db: FirebaseFirestore
-) : ProfileGoogleRepository{
+) : ProfileGoogleRepository {
     override val displayName = auth.currentUser?.displayName.toString()
     override val photoUrl = auth.currentUser?.photoUrl.toString()
 
