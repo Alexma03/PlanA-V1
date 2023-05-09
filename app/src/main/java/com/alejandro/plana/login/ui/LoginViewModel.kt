@@ -1,16 +1,37 @@
 package com.alejandro.plana.login.ui
 
 import android.util.Patterns
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.alejandro.plana.inicio.email.domain.model.ResponseEmail
+import com.alejandro.plana.inicio.email.domain.model.ResponseEmail.*
+import com.alejandro.plana.inicio.email.domain.repository.AuthRepositoryEmail
+import com.alejandro.plana.inicio.email.domain.repository.SignInResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val repo: AuthRepositoryEmail
+) : ViewModel() {
+    //Logica de registro
 
+    var signInResponse by mutableStateOf<SignInResponse>(Success(false))
+        private set
+
+    fun signInWithEmailAndPassword(email: String, password: String) = viewModelScope.launch {
+        signInResponse = Loading
+        signInResponse = repo.firebaseSignInWithEmailAndPassword(email, password)
+    }
+
+    //Parte de cambios de la UI
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
 

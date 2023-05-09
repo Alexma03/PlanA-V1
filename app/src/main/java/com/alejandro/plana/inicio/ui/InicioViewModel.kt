@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle.*
-import com.alejandro.plana.inicio.google.domain.repository.AuthGoogleRepository
+import com.alejandro.plana.inicio.google.domain.repository.AuthRepositoryGoogle
 import com.alejandro.plana.inicio.google.domain.repository.OneTapSignInResponse
 import com.alejandro.plana.inicio.google.domain.repository.SignInWithGoogleResponse
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InicioViewModel @Inject constructor(
-    private val repo: AuthGoogleRepository,
+    private val repo: AuthRepositoryGoogle,
     val oneTapClient: SignInClient
 ): ViewModel() {
     val isUserAuthenticated get() = repo.isUserAuthenticatedInFirebase

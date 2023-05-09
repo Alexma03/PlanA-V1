@@ -1,6 +1,5 @@
 package com.alejandro.plana.login.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -31,11 +30,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alejandro.plana.R
-import com.alejandro.plana.core.navigation.Routes
+import com.alejandro.plana.core.Utils.Companion.showMessage
+import com.alejandro.plana.login.ui.components.LogIn
 import com.alejandro.plana.ui.theme.PlanA
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltViewModel()) {
@@ -44,7 +41,9 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
             painter = painterResource(id = R.drawable.map_e1674497309430),
             contentDescription = "mapa",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize().align(Alignment.Center)
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.Center)
         )
         LazyColumn(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
             item {
@@ -52,14 +51,16 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                     painter = painterResource(id = R.drawable.logocompleton),
                     contentDescription = "logo",
                     contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.background(
-                        Color(
-                            red = 1f,
-                            green = 1f,
-                            blue = 1f,
-                            alpha = 0.25f
+                    modifier = Modifier
+                        .background(
+                            Color(
+                                red = 1f,
+                                green = 1f,
+                                blue = 1f,
+                                alpha = 0.25f
+                            )
                         )
-                    ).align(Alignment.Center)
+                        .align(Alignment.Center)
 
                 )
             }
@@ -68,14 +69,20 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                 Alignment.BottomCenter; Box(
                 Modifier
                     .fillMaxSize()
-            ) { Login(navController, viewModel) }
+            ) { Login(viewModel) }
             }
         }
     }
+    val context = LocalContext.current
+    LogIn(
+        showErrorMessage = { errorMessage ->
+            showMessage(context, errorMessage)
+        }
+    )
 }
 
 @Composable
-fun Login(navController: NavController, loginViewModel: LoginViewModel) {
+fun Login(loginViewModel: LoginViewModel) {
     val email: String by loginViewModel.email.observeAsState("")
     val password: String by loginViewModel.password.observeAsState("")
     val isLoginEnable by loginViewModel.isLoginEnabled.observeAsState(false)
@@ -102,7 +109,7 @@ fun Login(navController: NavController, loginViewModel: LoginViewModel) {
                 modifier = Modifier.align(Alignment.Start),
                 color = loginViewModel.colorTextorequisitos(password, 2)
             )
-            LoginButton(isLoginEnable, navController)
+            LoginButton(isLoginEnable, loginViewModel, email, password)
             MantenerIniciada(loginViewModel)
         }
     }
@@ -190,18 +197,15 @@ fun PasswordLogin(
 }
 
 @Composable
-fun LoginButton(loginEnable: Boolean, navController: NavController) {
-    val context = LocalContext.current
+fun LoginButton(
+    loginEnable: Boolean,
+    loginViewModel: LoginViewModel,
+    email: String,
+    password: String
+) {
     Button(
         onClick = {
-            navController.navigate(Routes.Home.route)
-            suspend {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        context, "Has iniciado sesion correctamente", Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+            loginViewModel.signInWithEmailAndPassword(email = email, password = password)
         },
         enabled = loginEnable,
         shape = RoundedCornerShape(50.dp),

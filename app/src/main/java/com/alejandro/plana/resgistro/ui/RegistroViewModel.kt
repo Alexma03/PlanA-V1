@@ -1,15 +1,43 @@
 package com.alejandro.plana.resgistro.ui
 
 import android.util.Patterns
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.alejandro.plana.inicio.email.domain.model.ResponseEmail
+import com.alejandro.plana.inicio.email.domain.model.ResponseEmail.*
+import com.alejandro.plana.inicio.email.domain.repository.AuthRepositoryEmail
+import com.alejandro.plana.inicio.email.domain.repository.SendEmailVerificationResponse
+import com.alejandro.plana.inicio.email.domain.repository.SignUpResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistroViewModel @Inject constructor() : ViewModel() {
+class RegistroViewModel @Inject constructor(
+    private val repo: AuthRepositoryEmail
+) : ViewModel() {
+    //Logica de registro
+
+    var signUpResponse by mutableStateOf<SignUpResponse>(Success(false))
+        private set
+    var sendEmailVerificationResponse by mutableStateOf<SendEmailVerificationResponse>(Success(false))
+        private set
+
+    fun signUpWithEmailAndPassword(email: String, password: String) = viewModelScope.launch {
+        signUpResponse = Loading
+        signUpResponse = repo.firebaseSignUpWithEmailAndPassword(email, password)
+    }
+
+    fun sendEmailVerification() = viewModelScope.launch {
+        sendEmailVerificationResponse = Loading
+        sendEmailVerificationResponse = repo.sendEmailVerification()
+    }
 
     //Parte de cambios de la UI
 

@@ -2,7 +2,7 @@ package com.alejandro.plana.profile.google.data
 
 import com.alejandro.plana.core.Constants.USERS
 import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle.*
-import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
+import com.alejandro.plana.profile.google.domain.ProfileRepositoryGoogle
 import com.alejandro.plana.profile.google.domain.RevokeAccessResponse
 import com.alejandro.plana.profile.google.domain.SignOutResponse
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -18,12 +18,12 @@ import javax.inject.Singleton
  * Esta clase es la encargada de manejar el perfil del usuario con Google.
  */
 @Singleton
-class ProfileRepositoryGoogle @Inject constructor(
+class ProfileRepositoryGoogleImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private var oneTapClient: SignInClient,
     private var signInClient: GoogleSignInClient,
     private val db: FirebaseFirestore
-) : ProfileGoogleRepository {
+) : ProfileRepositoryGoogle {
     override val displayName = auth.currentUser?.displayName.toString()
     override val photoUrl = auth.currentUser?.photoUrl.toString()
 

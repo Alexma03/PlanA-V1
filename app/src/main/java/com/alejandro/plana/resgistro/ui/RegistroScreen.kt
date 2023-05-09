@@ -1,6 +1,5 @@
 package com.alejandro.plana.resgistro.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,14 +35,21 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.alejandro.plana.R
+import com.alejandro.plana.core.Utils.Companion.showMessage
+import com.alejandro.plana.resgistro.ui.components.EnviarVerificacionEmail
+import com.alejandro.plana.resgistro.ui.components.Registro
 import com.alejandro.plana.ui.theme.BlueTwitter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun RegistroScreen(navController: NavHostController, viewModel: RegistroViewModel = hiltViewModel()) {
+fun RegistroScreen(
+    navController: NavHostController,
+    viewModel: RegistroViewModel = hiltViewModel()
+) {
     Box(Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.map_e1674497309430),
@@ -80,6 +86,13 @@ fun RegistroScreen(navController: NavHostController, viewModel: RegistroViewMode
             }
         }
     }
+    val context = LocalContext.current
+    Registro(sendEmailVerification = { viewModel.sendEmailVerification() },
+        showVerifyEmailMessage = { showMessage(context, "Por favor verifica tu email") },
+        navigateBack = { navController.popBackStack() }
+    )
+
+    EnviarVerificacionEmail()
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -166,13 +179,13 @@ fun RegistroUsuario(navController: NavHostController, registroViewModel: Registr
             )
             SignUpButton(
                 isSingUpEnable,
-                password,
-                name,
                 email,
-                navController,
+                password,
+                registroViewModel,
                 bringIntoViewRequester
             )
             Login(navController = navController)
+
         }
     }
 }
@@ -370,30 +383,14 @@ fun RepeatPassword(
 @Composable
 fun SignUpButton(
     SignUpEnable: Boolean,
+    email: String,
     password: String,
-    name: String,
-    repeatPassword: String,
-    navController: NavHostController,
+    viewModel: RegistroViewModel,
     bringIntoViewRequester: BringIntoViewRequester
 ) {
-    val context = LocalContext.current
-    /*val scope = rememberCoroutineScope()
-    val dataStore = RegisterUser(context)*/
     Button(
         onClick = {
-/*
-                navController.navigate(EmailLogin.route)
-*/
-            /*scope.launch {
-                dataStore.saveName(name)
-                dataStore.savePassword(password)
-                dataStore.saveEmail(email)
-                dataStore.savePostalCode(codigoPostal)
-            }*/
-            Toast.makeText(
-                context, "$name has sido registrado correctamente", Toast.LENGTH_SHORT
-            ).show()
-
+            viewModel.signUpWithEmailAndPassword(email, password)
         },
         enabled = SignUpEnable,
         shape = RoundedCornerShape(50.dp),

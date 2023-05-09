@@ -5,7 +5,7 @@ import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle
 typealias SignOutResponse = ResponseGoogle<Boolean>
 typealias RevokeAccessResponse = ResponseGoogle<Boolean>
 
-interface ProfileGoogleRepository {
+interface ProfileRepositoryGoogle {
     val displayName: String
     val photoUrl: String
 

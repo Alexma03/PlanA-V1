@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle.*
-import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
+import com.alejandro.plana.profile.google.domain.ProfileRepositoryGoogle
 import com.alejandro.plana.profile.google.domain.RevokeAccessResponse
 import com.alejandro.plana.profile.google.domain.SignOutResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val repo: ProfileGoogleRepository) :
+class ProfileViewModel @Inject constructor(private val repo: ProfileRepositoryGoogle) :
     ViewModel() {
     val displayName get() = repo.displayName
     val photoUrl get() = repo.photoUrl

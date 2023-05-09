@@ -1,14 +1,14 @@
-package com.alejandro.plana.inicio.di
+package com.alejandro.plana.inicio.google.di
 
 import android.app.Application
 import android.content.Context
 import com.alejandro.plana.R
 import com.alejandro.plana.core.Constants.SIGN_IN_REQUEST
 import com.alejandro.plana.core.Constants.SIGN_UP_REQUEST
-import com.alejandro.plana.profile.google.data.ProfileRepositoryGoogle
-import com.alejandro.plana.inicio.google.data.repository.AuthRepositoryGoogle
-import com.alejandro.plana.inicio.google.domain.repository.AuthGoogleRepository
-import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
+import com.alejandro.plana.profile.google.data.ProfileRepositoryGoogleImpl
+import com.alejandro.plana.inicio.google.data.repository.AuthGoogleRepository
+import com.alejandro.plana.inicio.google.domain.repository.AuthRepositoryGoogle
+import com.alejandro.plana.profile.google.domain.ProfileRepositoryGoogle
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -141,13 +141,14 @@ class AppModule {
         @Named(SIGN_UP_REQUEST)
         signUpRequest: BeginSignInRequest,
         db: FirebaseFirestore
-    ): AuthGoogleRepository = AuthRepositoryGoogle(
-        auth = auth,
-        oneTapClient = oneTapClient,
-        signInRequest = signInRequest,
-        signUpRequest = signUpRequest,
-        db = db
-    )
+    ): AuthRepositoryGoogle =
+        AuthGoogleRepository(
+            auth = auth,
+            oneTapClient = oneTapClient,
+            signInRequest = signInRequest,
+            signUpRequest = signUpRequest,
+            db = db
+        )
 
     /**
      * Proporciona la instancia del repositorio de perfil de Google.
@@ -164,7 +165,7 @@ class AppModule {
         oneTapClient: SignInClient,
         signInClient: GoogleSignInClient,
         db: FirebaseFirestore
-    ): ProfileGoogleRepository = ProfileRepositoryGoogle(
+    ): ProfileRepositoryGoogle = ProfileRepositoryGoogleImpl(
         auth = auth,
         oneTapClient = oneTapClient,
         signInClient = signInClient,
