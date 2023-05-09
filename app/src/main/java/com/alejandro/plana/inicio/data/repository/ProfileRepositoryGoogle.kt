@@ -15,7 +15,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Esta
+ * Esta clase es la encargada de manejar el perfil del usuario con Google.
  */
 @Singleton
 class ProfileRepositoryGoogle @Inject constructor(
@@ -27,6 +27,12 @@ class ProfileRepositoryGoogle @Inject constructor(
     override val displayName = auth.currentUser?.displayName.toString()
     override val photoUrl = auth.currentUser?.photoUrl.toString()
 
+    /**
+     * Este método es el encargado de cerrar sesión con Google.
+     * Primero se cierra sesión con GoogleOneTap.
+     * Después se cierra sesión con Firebase.
+     * @return success o failure
+     */
     override suspend fun signOut(): SignOutResponse {
         return try {
             oneTapClient.signOut().await()
@@ -37,6 +43,14 @@ class ProfileRepositoryGoogle @Inject constructor(
         }
     }
 
+    /**
+     * Este método es el encargado de revocar el acceso con Google.
+     * Verifica si hay un usuario actualmente autenticado.
+     * Si hay un usuario autenticado, se elimina el documento de la base de datos de Firebase.
+     * Se revoca el acceso con GoogleOneTap.
+     * Se elimina la cuenta de Firebase.
+     * @return success o failure
+     */
     override suspend fun revokeAccess(): RevokeAccessResponse {
         return try {
             auth.currentUser?.apply {
