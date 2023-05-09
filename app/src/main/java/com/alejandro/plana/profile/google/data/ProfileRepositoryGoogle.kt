@@ -1,4 +1,4 @@
-package com.alejandro.plana.inicio.data.repository
+package com.alejandro.plana.profile.google.data
 
 import com.alejandro.plana.core.Constants.USERS
 import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
