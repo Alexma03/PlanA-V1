@@ -24,6 +24,9 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
+/**
+ * Esta clase es la encargada de manejar la autenticación con Google.
+ */
 @Singleton
 class AuthRepositoryGoogle  @Inject constructor(
     private val auth: FirebaseAuth,
@@ -36,12 +39,20 @@ class AuthRepositoryGoogle  @Inject constructor(
 ) : AuthGoogleRepository {
     override val isUserAuthenticatedInFirebase = auth.currentUser != null
 
+    /**
+     * Este método es el encargado de autenticacion con GoogleOneTap.
+     * Primero se intenta iniciar sesión con la cuenta de Google que se tiene en el dispositivo.
+     * Si no se tiene ninguna cuenta de Google en el dispositivo, se muestra el selector de cuentas
+     * @return success o failure
+     */
     override suspend fun oneTapSignInWithGoogle(): OneTapSignInResponse {
         return try {
+            // Intenta iniciar sesión con la cuenta autorizada por el usuario en la seleccion de cuentas
             val signInResult = oneTapClient.beginSignIn(signInRequest).await()
             Success(signInResult)
         } catch (e: Exception) {
             try {
+                // En caso de que no funcione se mostraran todas las cuentas de Google que se tienen
                 val signUpResult = oneTapClient.beginSignIn(signUpRequest).await()
                 Success(signUpResult)
             } catch (e: Exception) {
@@ -50,29 +61,51 @@ class AuthRepositoryGoogle  @Inject constructor(
         }
     }
 
+    /**
+     * Este metodo se encarga del proceso de autenticación en Firebase utilizando las credenciales
+     * de una cuenta de Google. Verifica si el usuario ya existe en la base de datos de Firebase.
+     * Si no existe llama al metodo addUserToFirestore() para agregarlo.
+     * @param googleCredential es el token que se obtiene al iniciar sesión con Google
+     * @return success o failure
+     */
     override suspend fun firebaseSignInWithGoogle(
         googleCredential: AuthCredential
     ): SignInWithGoogleResponse {
         return try {
+            // Usa el token
             val authResult = auth.signInWithCredential(googleCredential).await()
+            // Verifica si existe
             val isNewUser = authResult.additionalUserInfo?.isNewUser ?: false
+            // Si no existe lo agrega a la base de datos
             if (isNewUser) {
                 addUserToFirestore()
             }
+            // Retorna success
             Success(true)
         } catch (e: Exception) {
             Failure(e)
         }
     }
 
+    /**
+     * Este metodo se encarga de añaadir el usuario a Firestore
+     * Obtiene el usuario actual y lo agrega a la base de datos
+     */
     private suspend fun addUserToFirestore() {
+        // lo obtiene de Firebase Auth
         auth.currentUser?.apply {
+            // convierte la informacion del usuario a un mapa de datos
             val user = toUser()
+            // utiliza el uid como id del documento
             db.collection(USERS).document(uid).set(user).await()
         }
     }
 }
 
+/**
+ * Esta funcion extiende la clase FirebaseUser y convierte la informacion del usuario a un mapa de datos
+ * @return un mapa de datos con la informacion del usuario
+ */
 fun FirebaseUser.toUser() = mapOf(
     DISPLAY_NAME to displayName,
     EMAIL to email,
