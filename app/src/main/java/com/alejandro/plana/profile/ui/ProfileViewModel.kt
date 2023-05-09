@@ -1,11 +1,11 @@
-package com.alejandro.plana.profile
+package com.alejandro.plana.profile.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
+import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle.*
 import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
 import com.alejandro.plana.profile.google.domain.RevokeAccessResponse
 import com.alejandro.plana.profile.google.domain.SignOutResponse

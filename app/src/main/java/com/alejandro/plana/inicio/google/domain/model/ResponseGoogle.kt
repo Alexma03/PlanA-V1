@@ -1,4 +1,4 @@
-package com.alejandro.plana.inicio.domain.model
+package com.alejandro.plana.inicio.google.domain.model
 
 /**
  * Clase sellada que representa el estado de la respuesta de una petición a Firebase

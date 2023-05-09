@@ -1,7 +1,7 @@
 package com.alejandro.plana.profile.google.data
 
 import com.alejandro.plana.core.Constants.USERS
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
+import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle.*
 import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
 import com.alejandro.plana.profile.google.domain.RevokeAccessResponse
 import com.alejandro.plana.profile.google.domain.SignOutResponse

@@ -1,4 +1,4 @@
-package com.alejandro.plana.profile.components
+package com.alejandro.plana.profile.ui.components
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons

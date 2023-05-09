@@ -1,4 +1,4 @@
-package com.alejandro.plana.profile
+package com.alejandro.plana.profile.ui
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarResult
@@ -6,13 +6,12 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.alejandro.plana.core.Constants.REVOKE_ACCESS_MESSAGE
 import com.alejandro.plana.core.Constants.SIGN_OUT
-import com.alejandro.plana.profile.components.ProfileContent
-import com.alejandro.plana.profile.components.ProfileTopBar
-import com.alejandro.plana.profile.components.RevokeAccess
-import com.alejandro.plana.profile.components.SignOut
+import com.alejandro.plana.profile.ui.components.ProfileContent
+import com.alejandro.plana.profile.ui.components.ProfileTopBar
+import com.alejandro.plana.profile.ui.components.RevokeAccess
+import com.alejandro.plana.profile.ui.components.SignOut
 import kotlinx.coroutines.launch
 
 @Composable

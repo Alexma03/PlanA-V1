@@ -1,6 +1,6 @@
 package com.alejandro.plana.profile.google.domain
 
-import com.alejandro.plana.inicio.domain.model.ResponseGoogle
+import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle
 
 typealias SignOutResponse = ResponseGoogle<Boolean>
 typealias RevokeAccessResponse = ResponseGoogle<Boolean>
