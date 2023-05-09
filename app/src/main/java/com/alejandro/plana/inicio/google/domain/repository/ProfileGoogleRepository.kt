@@ -1,9 +1,9 @@
 package com.alejandro.plana.inicio.google.domain.repository
 
-import com.alejandro.plana.inicio.domain.model.Response
+import com.alejandro.plana.inicio.domain.model.ResponseGoogle
 
-typealias SignOutResponse = Response<Boolean>
-typealias RevokeAccessResponse = Response<Boolean>
+typealias SignOutResponse = ResponseGoogle<Boolean>
+typealias RevokeAccessResponse = ResponseGoogle<Boolean>
 
 interface ProfileGoogleRepository {
     val displayName: String

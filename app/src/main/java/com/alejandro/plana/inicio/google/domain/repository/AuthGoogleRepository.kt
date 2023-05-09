@@ -1,12 +1,12 @@
 package com.alejandro.plana.inicio.google.domain.repository
 
-import com.alejandro.plana.inicio.domain.model.Response
+import com.alejandro.plana.inicio.domain.model.ResponseGoogle
 import com.google.android.gms.auth.api.identity.BeginSignInResult
 import com.google.firebase.auth.AuthCredential
 
 
-typealias OneTapSignInResponse = Response<BeginSignInResult>
-typealias SignInWithGoogleResponse = Response<Boolean>
+typealias OneTapSignInResponse = ResponseGoogle<BeginSignInResult>
+typealias SignInWithGoogleResponse = ResponseGoogle<Boolean>
 
 
 interface AuthGoogleRepository {

@@ -5,9 +5,9 @@ import android.content.Context
 import com.alejandro.plana.R
 import com.alejandro.plana.core.Constants.SIGN_IN_REQUEST
 import com.alejandro.plana.core.Constants.SIGN_UP_REQUEST
-import com.alejandro.plana.inicio.data.repository.AuthRepositoryGoogle
 import com.alejandro.plana.inicio.data.repository.ProfileRepositoryGoogle
-import com.alejandro.plana.inicio.domain.repository.AuthGoogleRepository
+import com.alejandro.plana.inicio.google.data.repository.AuthRepositoryGoogle
+import com.alejandro.plana.inicio.google.domain.repository.AuthGoogleRepository
 import com.alejandro.plana.profile.google.domain.ProfileGoogleRepository
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity

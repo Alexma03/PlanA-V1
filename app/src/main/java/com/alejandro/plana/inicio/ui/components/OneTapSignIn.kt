@@ -3,7 +3,7 @@ package com.alejandro.plana.inicio.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.alejandro.plana.inicio.domain.model.Response.*
+import com.alejandro.plana.inicio.domain.model.ResponseGoogle.*
 import com.alejandro.plana.inicio.ui.InicioViewModel
 import com.google.android.gms.auth.api.identity.BeginSignInResult
 
