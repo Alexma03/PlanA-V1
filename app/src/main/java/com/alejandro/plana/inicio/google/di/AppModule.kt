@@ -133,7 +133,7 @@ class AppModule {
      * @param db FirebaseFirestore para acceder a la base de datos de Firestore.
      */
     @Provides
-    fun provideAuthRepository(
+    fun provideAuthRepositoryGoogle(
         auth: FirebaseAuth,
         oneTapClient: SignInClient,
         @Named(SIGN_IN_REQUEST)

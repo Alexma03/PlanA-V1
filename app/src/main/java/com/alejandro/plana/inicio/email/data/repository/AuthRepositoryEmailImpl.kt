@@ -17,7 +17,6 @@ import javax.inject.Singleton
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Provides
 
-
 @Singleton
 class AuthRepositoryEmailImpl @Inject constructor(
     private val auth: FirebaseAuth
