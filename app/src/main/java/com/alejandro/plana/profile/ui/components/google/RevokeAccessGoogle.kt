@@ -1,4 +1,4 @@
-package com.alejandro.plana.profile.ui.components
+package com.alejandro.plana.profile.ui.components.google
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,19 +8,21 @@ import com.alejandro.plana.inicio.ui.components.ProgressBar
 import com.alejandro.plana.profile.ui.ProfileViewModel
 
 @Composable
-fun SignOut(
+fun RevokeAccessGoogle(
     viewModel: ProfileViewModel = hiltViewModel(),
-    navigateToAuthScreen: (signedOut: Boolean) -> Unit
+    navigateToAuthScreen: (accessRevoked: Boolean) -> Unit,
+    showSnackBar: () -> Unit
 ) {
-    when(val signOutResponse = viewModel.signOutResponse) {
+    when(val revokeAccessResponse = viewModel.revokeAccessResponseGoogle) {
         is Loading -> ProgressBar()
-        is Success -> signOutResponse.data?.let { signedOut ->
-            LaunchedEffect(signedOut) {
-                navigateToAuthScreen(signedOut)
+        is Success -> revokeAccessResponse.data?.let { accessRevoked ->
+            LaunchedEffect(accessRevoked) {
+                navigateToAuthScreen(accessRevoked)
             }
         }
         is Failure -> LaunchedEffect(Unit) {
-            print(signOutResponse.e)
+            print(revokeAccessResponse.e)
+            showSnackBar()
         }
     }
 }

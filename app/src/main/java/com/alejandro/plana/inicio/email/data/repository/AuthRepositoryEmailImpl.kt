@@ -2,7 +2,6 @@ package com.alejandro.plana.inicio.email.data.repository
 
 import com.alejandro.plana.inicio.email.domain.model.ResponseEmail.*
 import com.alejandro.plana.inicio.email.domain.repository.AuthRepositoryEmail
-import com.alejandro.plana.inicio.email.domain.repository.ReloadUserResponse
 import com.alejandro.plana.inicio.email.domain.repository.SendEmailVerificationResponse
 import com.alejandro.plana.inicio.email.domain.repository.SendPasswordResetEmailResponse
 import com.alejandro.plana.inicio.email.domain.repository.SignInResponse
@@ -16,6 +15,8 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.google.firebase.auth.FirebaseAuth
+import dagger.Provides
+
 
 @Singleton
 class AuthRepositoryEmailImpl @Inject constructor(
@@ -48,15 +49,6 @@ class AuthRepositoryEmailImpl @Inject constructor(
     ): SignInResponse {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()
-            Success(true)
-        } catch (e: Exception) {
-            Failure(e)
-        }
-    }
-
-    override suspend fun reloadFirebaseUser(): ReloadUserResponse {
-        return try {
-            auth.currentUser?.reload()?.await()
             Success(true)
         } catch (e: Exception) {
             Failure(e)

@@ -1,12 +1,14 @@
 package com.alejandro.plana.profile.email.domain
 
 import com.alejandro.plana.inicio.email.domain.model.ResponseEmail
-import kotlinx.coroutines.flow.StateFlow
+import com.google.firebase.auth.FirebaseUser
 
-typealias RevokeAccessResponse = ResponseEmail<Boolean>
+typealias RevokeAccessResponseEmail = ResponseEmail<Boolean>
+typealias ReloadUserResponseEmail = ResponseEmail<Boolean>
 
 interface ProfilerepositoryEmail {
-    fun signOut()
-
-    suspend fun revokeAccess(): RevokeAccessResponse
+    val currentUser: FirebaseUser?
+    fun signOutEmail()
+    suspend fun reloadFirebaseUser(): ReloadUserResponseEmail
+    suspend fun revokeAccessEmail(): RevokeAccessResponseEmail
 }

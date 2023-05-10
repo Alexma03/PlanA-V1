@@ -1,4 +1,4 @@
-package com.alejandro.plana.profile.ui.components
+package com.alejandro.plana.profile.ui.components.google
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -15,7 +15,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @Composable
-fun ProfileContent(
+fun ProfileContentGoogle(
     padding: PaddingValues,
     photoUrl: String,
     displayName: String

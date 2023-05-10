@@ -9,6 +9,8 @@ import com.alejandro.plana.core.navigation.Routes.*
 import com.alejandro.plana.home.ui.HomeScreen
 import com.alejandro.plana.inicio.ui.InicioScreen
 import com.alejandro.plana.login.ui.LoginScreen
+import com.alejandro.plana.login.ui.forgot_password.ForgotPasswordScreen
+import com.alejandro.plana.login.ui.forgot_password.components.ForgotPassword
 import com.alejandro.plana.profile.ui.ProfileScreen
 import com.alejandro.plana.resgistro.ui.RegistroScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -54,6 +56,16 @@ fun Navegacion(
         }
         composable(route = Login.route) {
             LoginScreen(navController = navController)
+        }
+        composable(route = ForgotPassword.route) {
+            ForgotPasswordScreen(
+                navigateBack = { navController.popBackStack() }
+            )
+        }
+        composable(route = VerifyEmail.route) {
+            ForgotPasswordScreen(
+                navigateBack = { navController.popBackStack() }
+            )
         }
     }
 }

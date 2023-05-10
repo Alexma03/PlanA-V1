@@ -3,8 +3,8 @@ package com.alejandro.plana.profile.google.data
 import com.alejandro.plana.core.Constants.USERS
 import com.alejandro.plana.inicio.google.domain.model.ResponseGoogle.*
 import com.alejandro.plana.profile.google.domain.ProfileRepositoryGoogle
-import com.alejandro.plana.profile.google.domain.RevokeAccessResponse
-import com.alejandro.plana.profile.google.domain.SignOutResponse
+import com.alejandro.plana.profile.google.domain.RevokeAccessResponseGoogle
+import com.alejandro.plana.profile.google.domain.SignOutResponseGoogle
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +33,7 @@ class ProfileRepositoryGoogleImpl @Inject constructor(
      * Después se cierra sesión con Firebase.
      * @return success o failure
      */
-    override suspend fun signOut(): SignOutResponse {
+    override suspend fun signOut(): SignOutResponseGoogle {
         return try {
             oneTapClient.signOut().await()
             auth.signOut()
@@ -51,7 +51,7 @@ class ProfileRepositoryGoogleImpl @Inject constructor(
      * Se elimina la cuenta de Firebase.
      * @return success o failure
      */
-    override suspend fun revokeAccess(): RevokeAccessResponse {
+    override suspend fun revokeAccess(): RevokeAccessResponseGoogle {
         return try {
             auth.currentUser?.apply {
                 db.collection(USERS).document(uid).delete().await()

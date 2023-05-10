@@ -1,4 +1,4 @@
-package com.alejandro.plana.profile.ui.components
+package com.alejandro.plana.profile.ui.components.google
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -9,7 +9,7 @@ import com.alejandro.plana.core.Constants.REVOKE_ACCESS
 import com.alejandro.plana.core.Constants.SIGN_OUT
 
 @Composable
-fun ProfileTopBar(
+fun ProfileTopBarGoogle(
     signOut: () -> Unit,
     revokeAccess: () -> Unit
 ) {

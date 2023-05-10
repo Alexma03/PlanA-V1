@@ -27,7 +27,13 @@ object Constants {
     const val REGISTRO_SCREEN = "Registro"
     const val HOME_SCREEN = "Home"
     const val LOGIN_SCREEN = "Login"
+    const val FORGOT_PASSWORD_SCREEN = "ForgotPassword"
+    const val VERIFY_EMAIL_SCREEN = "VerifyEmail"
 
     //Messages
     const val REVOKE_ACCESS_MESSAGE = "You need to re-authenticate before revoking the access."
+
+    //Error Messages
+    const val SENSITIVE_OPERATION_MESSAGE = "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
+
 }
