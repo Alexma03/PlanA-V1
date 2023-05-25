@@ -29,6 +29,10 @@ o planes cuando no sepamos que hacer
 
 Creada desde 0 por mi
 
+## Prototipo del proyecto
+
+https://www.figma.com/file/yNdq5UxgcfSHKc0TnQB1N9/Plan-A?type=design&node-id=74%3A385&t=AGD8NqEzHsQWkTEz-1
+
 ## Version History
 
 * 0.2
