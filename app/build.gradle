@@ -64,6 +64,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     //Compose
     implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material3:material3:$material3_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
     //Firebase
@@ -78,8 +79,8 @@ dependencies {
     //Coil
     implementation "io.coil-kt:coil-compose:$coil_compose_version"
     // LiveData
-    implementation 'androidx.compose.runtime:runtime-livedata:1.4.2'
+    implementation 'androidx.compose.runtime:runtime-livedata:1.4.3'
     //Icons Extended
-    implementation 'androidx.compose.material:material-icons-extended:1.4.2'
+    implementation 'androidx.compose.material:material-icons-extended:1.4.3'
 
 }
